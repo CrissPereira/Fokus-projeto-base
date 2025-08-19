@@ -1,30 +1,57 @@
-//Seleção de Botões 
+
 const BotaoFoco = document.querySelector('.app__card-button--foco')
 const BotaoCurto = document.querySelector('.app__card-button--curto')
 const BotaoLongo = document.querySelector('.app__card-button--longo')
-
-//Cor de Fundo
 const html = document.querySelector('html')
-
-//Imagem
 const imagem = document.querySelector('.app__image')
+const titulo = document.querySelector('.app__title')
 
 //Funções ao clicar nos botões
 
 //Foco
-BotaoFoco.addEventListener('click' , () => {
-    html.setAttribute('data-contexto' , 'foco')
-    imagem.setAttribute('src' , './imagens/foco.png')
-} )
+BotaoFoco.addEventListener('click', () => {
+    alterarContexto('foco')
+})
 
 //Curto
-BotaoCurto.addEventListener('click' , () => {
-    html.setAttribute('data-contexto' , 'descanso-curto')
-    imagem.setAttribute('src' , './imagens/descanso-curto.png')
-} )
+BotaoCurto.addEventListener('click', () => {
+    alterarContexto('descanso-curto')
+})
 
 //Longo
-BotaoLongo.addEventListener('click' , () => {
-    html.setAttribute('data-contexto' , 'descanso-longo')
-    imagem.setAttribute('src' , './imagens/descanso-longo.png')
-} )
+BotaoLongo.addEventListener('click', () => {
+    alterarContexto('descanso-longo')
+})
+
+
+function alterarContexto(contexto) {
+    html.setAttribute('data-contexto', contexto)
+    imagem.setAttribute('src', `/imagens/${contexto}.png`)
+
+    switch (contexto) {
+        case "foco":
+            titulo.innerHTML = `
+                Otimize sua produtividade,<br>
+                <strong class="app__title-strong">mergulhe no que importa.</strong>
+            `
+            break;
+
+        case "descanso-curto":
+            titulo.innerHTML = `
+                Que tal dar uma respirada?<br>
+                <strong class="app__title-strong">Faça um pausa curta!</strong>
+            `
+            break;
+
+        case "descanso-longo":
+            titulo.innerHTML = `
+               Hora de voltar à superfície<br>
+                <strong class="app__title-strong">Faça uma pausa Longa.</strong>
+            `
+            break;
+
+        default:
+            break;
+    }
+
+}
