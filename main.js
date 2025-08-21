@@ -1,11 +1,15 @@
 // Selecionando os elementos do DOM
-const html = document.querySelector('html')
-const imagem = document.querySelector('.app__image')
-const titulo = document.querySelector('.app__title')
-const Botoes = document.querySelectorAll('.app__card-button')
-const musicacheck = document.querySelector('.toggle-checkbox')
+const html = document.querySelector('html')// Elemento HTML principal
+const imagem = document.querySelector('.app__image')// Imagem principal 
+const titulo = document.querySelector('.app__title')// Título principal
+const Botoes = document.querySelectorAll('.app__card-button')// Botões de foco, curto e longo
+const musicacheck = document.querySelector('.toggle-checkbox')// Checkbox de música
+const StartouPauseBT = document.querySelector('#start-pause')// Botão de iniciar/pausar
 const musica = new Audio('./sons/luna-rise-part-one.mp3')
 musica.loop = true
+
+let ContadordeSegundos = 5
+
 
 // Adicionando evento de clique ao checkbox de música
 musicacheck.addEventListener('change', () => {
@@ -93,3 +97,28 @@ function alterarContexto(contexto) {
     })
 
 }
+// Função para atualizar o contador de segundos
+function atualizarContador() {
+    if( ContadordeSegundos <= 0) {
+        pararContador() // Chama a função para parar o contador
+        alert('Tempo esgotado!') // Exibe um alerta quando o tempo se esgota
+        return // Interrompe a execução da função
+    }
+    ContadordeSegundos -= 1 // Decrementa o contador de segundos 
+    console.log(ContadordeSegundos)
+}
+
+// Adicionando evento de clique ao botão de iniciar/pausar
+StartouPauseBT.addEventListener('click', iniciarContador)
+
+// Inicia o contador
+function iniciarContador() {
+    atualizaporsegundos = setInterval(atualizarContador, 1000) // Atualiza o contador a cada segundo
+}
+
+function pararContador() {
+    clearInterval(atualizaporsegundos) // Limpa o intervalo do contador
+    atualizaporsegundos = null // Reseta a variável do intervalo
+    ContadordeSegundos = 5 // Reseta o contador de segundos para 5
+}
+
